@@ -8,11 +8,23 @@
 
  - NBPhoneNumberUtil
  - NBAsYouTypeFormatter
+ - NBTextField.swift (Swift 3)
 
 > ARC only, or add the **"-fobjc-arc"** flag for non-ARC
 
 ## Update Log
 [https://github.com/iziz/libPhoneNumber-iOS/wiki/Update-Log](https://github.com/iziz/libPhoneNumber-iOS/wiki/Update-Log)
+
+
+## Issue
+You can check phone number validation using below link.
+https://rawgit.com/googlei18n/libphonenumber/master/javascript/i18n/phonenumbers/demo-compiled.html
+
+Please report, if the above results are different from this iOS library.
+Otherwise, please create issue to following link below to request additional telephone numbers formatting rule.
+https://github.com/google/libphonenumber/issues
+
+Metadata in this library was generated from that. so, you should change it first. :)
 
 ## Install 
 
@@ -39,6 +51,8 @@ To integrate libPhoneNumber into your Xcode project using Carthage, specify it i
 github "iziz/libPhoneNumber-iOS"
 ```
 
+And set the **Embedded Content Contains Swift** to "Yes" in your build settings.
+
 #### Setting up manually
  Add source files to your projects from libPhoneNumber
     - Add "CoreTelephony.framework"
@@ -53,7 +67,6 @@ See sample test code from
  NBPhoneNumber *myNumber = [phoneUtil parse:@"6766077303"
                               defaultRegion:@"AT" error:&anError];
  if (anError == nil) {
-     // Should check error
      NSLog(@"isValidPhoneNumber ? [%@]", [phoneUtil isValidNumber:myNumber] ? @"YES":@"NO");
 
      // E164          : +436766077303
@@ -95,8 +108,13 @@ See sample test code from
 ```
 
 #### with Swift
-##### - in Bridging-Header
-```swift
+##### Case (1) with Framework
+```
+import libPhoneNumberiOS
+```
+
+##### Case (2) with Bridging-Header
+```obj-c
 // Manually added
 #import "NBPhoneNumberUtil.h"
 #import "NBPhoneNumber.h"
@@ -108,23 +126,12 @@ See sample test code from
 // add more if you want...
 ```
 
+##### Case (3) with CocoaPods
+import libPhoneNumber_iOS
+
+
 ##### - in swift class file
-```swift
-override func viewDidLoad() {
-    super.viewDidLoad()
-    let phoneUtil = NBPhoneNumberUtil()
-
-    var errorPointer:NSError?
-    var number:NBPhoneNumber? = phoneUtil.parse("01041241282", defaultRegion:"KR", error:&errorPointer)
-    if errorPointer == nil && number != nil {
-       println("number is: \(number)")
-    } else {
-       println("number error: \(errorPointer?.localizedDescription)")
-    }
-}
-```
-
-###### 2.0
+###### 2.x
 ```swift
 override func viewDidLoad() {
     super.viewDidLoad()
@@ -133,7 +140,7 @@ override func viewDidLoad() {
 
     do {
         let phoneNumber: NBPhoneNumber = try phoneUtil.parse("01065431234", defaultRegion: "KR")
-        let formattedString: String = try phoneUtil.format(phoneNumber, numberFormat: NBEPhoneNumberFormatE164)
+        let formattedString: String = try phoneUtil.format(phoneNumber, numberFormat: .E164)
 
         NSLog("[%@]", formattedString)
     }
@@ -164,4 +171,4 @@ override func viewDidLoad() {
     NSLog(@"%@", [f inputString:@"16502532222"]); // 1 650 253 2222
 ```
 
-##### Visit [libphonenumber](https://github.com/googlei18n/libphonenumber) for more information or mail (zen.isis@gmail.com)
+##### Visit [libphonenumber](https://github.com/google/libphonenumber) for more information or mail (zen.isis@gmail.com)

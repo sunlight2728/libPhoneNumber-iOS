@@ -1,7 +1,7 @@
 Authors ordered by first contribution.
 
 SungMin Ha (ishtar aka iziz, zen.isis@gmail.com)
-Hyuk Hur (http://hyukhur.tumblr.com)
+Hyuk Hur (hyukhur@gmail.com)
 
 Cliff Rowley (cliffrowley@gmail.com)
   - Missing return value in formatInOriginalFormat:regionCallingFrom:error
@@ -9,7 +9,7 @@ Cliff Rowley (cliffrowley@gmail.com)
 
 Aaron Wojnowski (aaronwojnowski@gmail.com)
   - Remove extra r from the countryCodeFromRegionCode method name.
-  
+
 stonyw
   - Handle char @ when normalize any strings, eg email
 
@@ -33,3 +33,7 @@ Cliff Ingham (inghamn@bloomington.in.gov, http://bloomington.in.gov/)
 
 rhoiberg
   - Allow NBPhoneNumberUtil to be created using a specified bundle.
+
+Google Inc.
+  - Add some digits mapping.
+  - Reduce Library Size by compiling data directly into binary instead of generating a class per region.
